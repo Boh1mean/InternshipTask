@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_08_000636) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_09_211026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.string "bearer", null: false
+    t.bigint "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bearer"], name: "index_auth_tokens_on_bearer", unique: true
+    t.index ["student_id"], name: "index_auth_tokens_on_student_id"
+  end
+
+  create_table "school_classes", force: :cascade do |t|
+    t.integer "number"
+    t.string "letter"
+    t.integer "students_count"
+    t.bigint "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_classes_on_school_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "first_name", null: false
@@ -21,4 +46,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_08_000636) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "auth_tokens", "students"
 end
