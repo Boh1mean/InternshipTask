@@ -1,25 +1,13 @@
 # README
+#InternshipTask
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Запуск проекта
 
-Things you may want to cover:
+1. **Клонируйте репозиторий:**
+   git clone https://github.com/Boh1mean/InternshipTask
+2. **Соберите контейнеры**   
+   docker-compose up
+3. **Выполните миграции**
+docker-compose run web rails db:create db:migrate
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# InternshipTask
+**Спасибо!**
