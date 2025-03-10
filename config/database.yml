@@ -25,7 +25,7 @@ production:
     <<: *default
     database: internship_app_production
     username: postgres
-    password: <%= ENV["INTERNSHIP_APP_DATABASE_PASSWORD", "password"] %>
+    password: password
     host: db
   cache:
     <<: *primary_production
