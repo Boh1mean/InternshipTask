@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_09_211026) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_09_213023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,12 +24,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_09_211026) do
   end
 
   create_table "school_classes", force: :cascade do |t|
-    t.integer "number"
-    t.string "letter"
-    t.integer "students_count"
-    t.bigint "school_id"
+    t.integer "number", null: false
+    t.string "letter", null: false
+    t.integer "students_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "school_id", null: false
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
@@ -45,7 +45,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_09_211026) do
     t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "school_class_id", null: false
+    t.bigint "school_id", null: false
+    t.index ["school_class_id"], name: "index_students_on_school_class_id"
+    t.index ["school_id"], name: "index_students_on_school_id"
   end
 
   add_foreign_key "auth_tokens", "students"
+  add_foreign_key "school_classes", "schools"
+  add_foreign_key "students", "school_classes"
+  add_foreign_key "students", "schools"
 end
